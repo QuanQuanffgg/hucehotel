@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Phòng của tôi | HUCE HOTEL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* =========================
+       LUXURY MY ROOMS STYLE - TOÀN BỘ STYLE TRONG ĐÂY
+    ========================= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(to bottom, #0f0f0f 0%, #1a1a1a 100%);
+      color: #e8e8e8;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* HEADER */
+    .header-container {
+      background: linear-gradient(to right, #0f0f0f, #1a1a1a);
+      padding: 15px 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 900;
+      color: #d4af37;
+      letter-spacing: 3px;
+      white-space: nowrap;
+    }
+
+    /* Mobile menu toggle button */
+    .menu-toggle {
+      display: none;
+      background: transparent;
+      border: none;
+      color: #d4af37;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 10px;
+    }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .nav-menu a {
+      color: #e8e8e8;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-menu a:hover {
+      color: #d4af37;
+    }
+
+    .auth-btn, .user-toggle {
+      background: transparent;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.3s;
+    }
+
+    .auth-btn:hover, .user-toggle:hover {
+      background: rgba(212, 175, 55, 0.2);
+    }
+
+    .user-menu {
+      position: relative;
+    }
+
+    .user-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: #1e1e1e;
+      border: 1px solid #d4af37;
+      border-radius: 10px;
+      min-width: 200px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .user-dropdown a {
+      display: block;
+      padding: 14px 20px;
+      color: #e8e8e8;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .user-dropdown a:hover {
+      background: rgba(212, 175, 55, 0.1);
+      color: #d4af37;
+    }
+
+    /* CONTENT */
+    .myrooms-container {
+      max-width: 1300px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    .myrooms-title {
+      text-align: center;
+      font-size: 42px;
+      font-weight: 700;
+      color: #d4af37;
+      margin-bottom: 50px;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    .myrooms-title::after {
+      content: '';
+      width: 100px;
+      height: 2px;
+      background: #d4af37;
+      display: block;
+      margin: 20px auto 0;
+    }
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 40px;
+    }
+
+    .booking-card {
+      background: linear-gradient(145deg, #1e1e1e, #161616);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid #2a2a2a;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .booking-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #d4af37, #f0c14b);
+      opacity: 0.8;
+    }
+
+    .booking-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 30px 60px rgba(212, 175, 55, 0.15);
+      border-color: #d4af37;
+    }
+
+    .booking-header {
+      background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+      color: #d4af37;
+      padding: 25px;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .booking-header h3 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .booking-body {
+      padding: 30px;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #cccccc;
+    }
+
+    .booking-body p {
+      margin: 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .booking-body strong {
+      color: #d4af37;
+      min-width: 120px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 8px 18px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .status-pending { background: rgba(255,193,7,0.15); color: #ffc107; border: 1px solid #ffc107; }
+    .status-approved { background: rgba(40,167,69,0.15); color: #28a745; border: 1px solid #28a745; }
+    .status-rejected { background: rgba(220,53,69,0.15); color: #dc3545; border: 1px solid #dc3545; }
+    .status-cancelled { background: rgba(108,117,125,0.15); color: #6c757d; border: 1px solid #6c757d; }
+
+    .empty-state {
+      text-align: center;
+      font-size: 22px;
+      color: #888;
+      margin-top: 100px;
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #0f0f0f;
+      color: #888;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    /* ========================
+       RESPONSIVE MOBILE - HAMBURGER MENU VÀNG KIM
+    ======================== */
+    @media (max-width: 992px) {
+      .header-container {
+        padding: 15px 20px;
+      }
+
+      .logo {
+        font-size: 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 20px;
+        gap: 15px;
+        text-align: center;
+        transition: all 0.4s ease;
+        z-index: 99;
+      }
+
+      /* Mở menu: nền vàng kim, chữ đen */
+      .nav-menu.active {
+        display: flex;
+        background: #d4af37;
+        color: #0f0f0f !important;
+      }
+
+      .nav-menu.active a,
+      .nav-menu.active .auth-btn,
+      .nav-menu.active .user-toggle {
+        color: #0f0f0f !important;
+        border-color: #0f0f0f;
+      }
+
+      .nav-menu.active .auth-btn:hover,
+      .nav-menu.active .user-toggle:hover {
+        background: rgba(15, 15, 15, 0.2);
+      }
+
+      .nav-menu.active .user-dropdown a {
+        color: #0f0f0f;
+      }
+
+      .nav-menu.active .user-dropdown a:hover {
+        background: rgba(15, 15, 15, 0.1);
+      }
+
+      .nav-menu a,
+      .auth-btn,
+      .user-toggle {
+        width: 100%;
+        padding: 14px;
+      }
+
+      .user-dropdown {
+        position: static;
+        width: 100%;
+        margin-top: 10px;
+        box-shadow: none;
+        border-radius: 8px;
+      }
+
+      .myrooms-container {
+        margin: 40px auto;
+        padding: 0 15px;
+      }
+
+      .myrooms-title {
+        font-size: 34px;
+      }
+
+      .booking-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .booking-card:hover {
+        transform: none;
+      }
+
+      .booking-body p {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+
+      .booking-body strong {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .myrooms-title {
+        font-size: 30px;
+      }
+
+      .logo {
+        font-size: 26px;
+      }
+
+      .empty-state {
+        font-size: 19px;
+      }
+    }
+  </style>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-container">
+    <div class="logo">HUCE HOTEL</div>
+
+    <!-- Nút toggle menu cho mobile -->
+    <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href="/">Giới thiệu</a>
+      <a href="/booking-form.html">Đặt phòng</a>
+      <a href="/#news">Tin tức</a>
+      <a href="/index.html#hotelfooter">Liên hệ</a>
+
+      <button id="loginBtn" class="auth-btn" onclick="location.href='/login.html'">Đăng nhập</button>
+
+      <div id="userMenu" class="user-menu" style="display:none;">
+        <div class="user-toggle" onclick="toggleUserMenu()">
+          Xin chào <strong id="userName"></strong> ▼
+        </div>
+        <div id="userDropdown" class="user-dropdown">
+          <a href="/myrooms.html">Phòng của tôi</a>
+          <a href="#" onclick="logout()">Đăng xuất</a>
+          <a href="/admin.html" id="adminLink" style="display:none;">Quản trị</a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<div class="myrooms-container">
+  <h1 class="myrooms-title">Phòng bạn đã đặt</h1>
+
+  <div id="bookingList" class="booking-grid"></div>
+
+  <div id="emptyState" class="empty-state" style="display:none;">
+    Bạn chưa đặt phòng nào.<br>
+    Hãy khám phá và đặt ngay một kỳ nghỉ sang trọng tại HUCE Hotel.
+  </div>
+
+  <div id="errorMessage" class="empty-state" style="display:none; color: #dc3545;">
+    Có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại sau hoặc kiểm tra kết nối.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <p style="margin:0; font-size:15px;">© 2025 HUCE Hotel - Hotline: 1900 1234 | Đẳng cấp thượng lưu</p>
+</footer>
+
+<script>
+/* ================= MOBILE MENU TOGGLE ================= */
+function toggleMobileMenu() {
+  const nav = document.getElementById('navMenu');
+  nav.classList.toggle('active');
+}
+
+/* ================= USER DROPDOWN ================= */
+function toggleUserMenu() {
+  const dropdown = document.getElementById('userDropdown');
+  dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Đóng dropdown khi click ngoài
+document.addEventListener('click', function(e) {
+  const userMenu = document.querySelector('.user-menu');
+  if (!e.target.closest('.user-menu')) {
+    document.getElementById('userDropdown').style.display = 'none';
+  }
+  // Đóng mobile menu khi click ngoài
+  const nav = document.getElementById('navMenu');
+  if (!e.target.closest('.menu-toggle') && !e.target.closest('.nav-menu')) {
+    nav.classList.remove('active');
+  }
+});
+
+/* ================= AUTH ================= */
+const token = localStorage.getItem('token');
+const user = JSON.parse(localStorage.getItem('user'));
+
+const loginBtn = document.getElementById('loginBtn');
+const userMenu = document.getElementById('userMenu');
+const userName = document.getElementById('userName');
+const adminLink = document.getElementById('adminLink');
+
+if (!token || !user) {
+  alert('Vui lòng đăng nhập');
+  location.href = '/login.html';
+}
+
+loginBtn.style.display = 'none';
+userMenu.style.display = 'block';
+userName.textContent = user.name || user.email;
+
+if (user.role === 'admin') {
+  adminLink.style.display = 'block';
+}
+
+function logout() {
+  localStorage.clear();
+  location.href = '/login.html';
+}
+
+/* ================= LOAD BOOKINGS ================= */
+async function loadBookings() {
+  const list = document.getElementById('bookingList');
+  const empty = document.getElementById('emptyState');
+  const errorMsg = document.getElementById('errorMessage');
+
+  try {
+    const response = await fetch('/api/bookings/my', {
+      headers: { Authorization: 'Bearer ' + token }
+    });
+
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+
+    const res = await response.json();
+
+    if (!res.success || !res.data || res.data.length === 0) {
+      empty.style.display = 'block';
+      return;
+    }
+
+    list.innerHTML = res.data.map(b => `
+      <div class="booking-card">
+        <div class="booking-header">
+          <h3>Phòng ${b.roomId} - ${b.roomType}</h3>
+        </div>
+        <div class="booking-body">
+          <p><strong>Khách:</strong> <span>${b.userName}</span></p>
+          <p><strong>Thời gian:</strong>
+            <span>${new Date(b.checkin).toLocaleDateString('vi-VN')} → ${new Date(b.checkout).toLocaleDateString('vi-VN')}</span>
+          </p>
+          <p><strong>Số ngày:</strong> <span>${b.days} ngày</span></p>
+          <p><strong>Tổng tiền:</strong>
+            <span>${b.totalPrice.toLocaleString('vi-VN')}đ</span>
+          </p>
+          <p>
+            <strong>Trạng thái:</strong>
+            <span class="status status-${b.status}">
+              ${b.status === 'pending' ? 'Chờ xác nhận' :
+                b.status === 'approved' ? 'Đã xác nhận' :
+                b.status === 'rejected' ? 'Bị từ chối' :
+                'Đã hủy'}
+            </span>
+          </p>
+        </div>
+      </div>
+    `).join('');
+  } catch (error) {
+    console.error('Error:', error);
+    errorMsg.style.display = 'block';
+  }
+}
+
+loadBookings();
+</script>
+
+</body>
+</html>

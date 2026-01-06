@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUCE Hotel - Khách Sạn Cao Cấp & Sang Trọng</title>
+  <link rel="stylesheet" href="css/style.css">
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Hiệu ứng 0.5 trên 5 sao */
+    /* ================= HILARIOUS REVIEWS SECTION ================= */
+.reviews-section {
+    padding: 100px 0;
+    background: #0a0a0a;
+    text-align: center;
+}
+
+.reviews-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    color: #d4af37;
+    margin-bottom: 50px;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.review-card {
+    background: #111;
+    border: 1px solid #222;
+    padding: 30px;
+    border-radius: 15px;
+    transition: 0.4s;
+    position: relative;
+    text-align: left;
+}
+
+.review-card:hover {
+    border-color: #d4af37;
+    transform: translateY(-10px);
+}
+.stars {
+    color: #444; /* Màu xám cho các sao trống */
+    margin-bottom: 15px;
+    font-size: 18px;
+    display: flex;
+    gap: 2px;
+}
+
+/* Ngôi sao đầu tiên chứa nửa vàng nửa xám */
+.stars i.half-gold {
+    position: relative;
+    display: inline-block;
+    color: #444; /* Nền của ngôi sao đầu tiên là xám */
+}
+
+.stars i.half-gold::before {
+    content: '\f089'; /* Icon star-half trong FontAwesome */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #d4af37; /* Màu vàng Gold cho nửa ngôi sao */
+    width: 50%;
+    overflow: hidden;
+}
+
+/* Các ngôi sao trắng/xám còn lại */
+.stars i.empty-star {
+    color: #444; 
+}
+    /* Tùy chỉnh thêm cho landing page giới thiệu */
+    /* ================= LUXURY TEAM SECTION ================= */
+.team-section {
+    padding: 100px 0;
+    background: #050505; /* Đen sâu hơn */
+    position: relative;
+    overflow: hidden;
+}
+
+.team-title {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.team-title h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    color: #d4af37;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.team-title .line {
+    width: 100px;
+    height: 2px;
+    background: #d4af37;
+    margin: 20px auto;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.team-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 0 40px 0 40px; /* Bo góc đối xứng sang trọng */
+    padding: 40px 20px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.team-card:hover {
+    transform: translateY(-15px);
+    background: rgba(212, 175, 55, 0.05);
+    border-color: #d4af37;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.img-container {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 25px;
+}
+
+.img-container::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 2px solid #d4af37;
+    border-radius: 50%;
+    border-bottom-color: transparent; /* Hiệu ứng khuyết vòng tròn */
+    transition: transform 0.8s ease;
+}
+
+.team-card:hover .img-container::before {
+    transform: rotate(180deg);
+}
+
+.member-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    filter: grayscale(100%); /* Màu ảnh đen trắng ban đầu */
+    transition: 0.5s;
+    border: 5px solid transparent;
+}
+
+.team-card:hover .member-img {
+    filter: grayscale(0%);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.member-info h3 {
+    font-family: 'Playfair Display', serif;
+    color: #d4af37;
+    font-size: 24px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.member-info .role {
+    display: block;
+    color: #ffffff;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.member-info .desc {
+    color: #999;
+    font-size: 14px;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.social-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.team-card:hover .social-links {
+    opacity: 1;
+}
+
+.social-links a {
+    color: #d4af37;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #fff;
+    transform: scale(1.2);
+}
+   .news-form {
+      background: #111111;
+      padding: 40px;
+      border-radius: 20px;
+      margin-bottom: 60px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      border: 1px solid #222;
+    }
+
+    .news-form input,
+    .news-form textarea {
+      width: 100%;
+      padding: 16px 20px;
+      margin: 15px 0;
+      border-radius: 12px;
+      border: 1px solid #333;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 16px;
+      transition: all 0.3s;
+    }
+
+    .news-form input:focus,
+    .news-form textarea:focus {
+      outline: none;
+      border-color: #d4af37;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    .news-form textarea {
+      height: 160px;
+      resize: vertical;
+    }
+
+    .image-upload {
+      border: 2px dashed #d4af37;
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+      cursor: pointer;
+      background: #1a1a1a;
+      transition: 0.3s;
+      margin: 25px 0;
+      color: #888;
+    }
+
+    .image-upload:hover {
+      background: #222222;
+      border-color: #c4a137;
+    }
+
+    #imagePreview {
+      max-width: 100%;
+      max-height: 300px;
+      margin-top: 20px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+      display: none;
+    }
+
+.news-item {
+  background: #111111;
+  padding: 30px;
+  border-radius: 20px;
+  margin: 30px 0;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  border: 1px solid #222;
+  transition: transform 0.4s;
+}
+
+.news-item img {
+  width: 25%;           
+  max-width: 250px;     
+  height: auto;         
+  min-height: 180px;    
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+  flex-shrink: 0;
+}
+
+    .news-item:hover {
+      transform: translateY(-10px);
+    }
+
+
+
+    .news-content {
+      flex: 1;
+    }
+
+    .news-content h3 {
+      color: #d4af37;
+      margin: 0 0 15px;
+      font-size: 24px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .news-content p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #cccccc;
+      margin-bottom: 15px;
+    }
+
+    .news-content small {
+      color: #666;
+      font-style: italic;
+    }
+
+    .news-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: #222;
+      margin: 50px 0;
+    }
+
+    .hero {
+      position: relative;
+      height: 90vh;
+      min-height: 600px;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('hotel-hero.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #d4af37;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.9);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .hero p {
+      font-size: 22px;
+      margin-bottom: 35px;
+      color: #cccccc;
+    }
+
+    .btn-explore {
+      background: linear-gradient(90deg, #d4af37, #f0c14b);
+      color: #000;
+      padding: 16px 35px;
+      border-radius: 40px;
+      font-size: 18px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.4s;
+      box-shadow: 0 8px 25px rgba(212,175,55,0.4);
+    }
+
+    .btn-explore:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 35px rgba(212,175,55,0.6);
+    }
+
+    .about-section {
+      padding: 90px 0;
+      background: #0a0a0a;
+    }
+
+    .about-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .about-text h2 {
+      font-size: 38px;
+      color: #d4af37;
+      margin-bottom: 25px;
+      position: relative;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .about-text h2::after {
+      content: '';
+      width: 80px;
+      height: 4px;
+      background: #d4af37;
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+    }
+
+    .about-text p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #aaaaaa;
+      margin-bottom: 20px;
+    }
+
+    .about-image {
+      flex: 1;
+      min-width: 280px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.8);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+    }
+
+    .history {
+      padding: 90px 0;
+      background: #111111;
+    }
+
+    .history h2 {
+      text-align: center;
+      font-size: 38px;
+      color: #d4af37;
+      margin-bottom: 50px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .timeline {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: #d4af37;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .timeline-item {
+      padding: 15px 30px;
+      position: relative;
+      width: 50%;
+      margin-bottom: 40px;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 50%;
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #d4af37;
+      border-radius: 50%;
+      top: 25px;
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(odd)::after {
+      right: -12px;
+    }
+
+    .timeline-item:nth-child(even)::after {
+      left: -12px;
+    }
+
+    .timeline-content {
+      padding: 25px;
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.8);
+    }
+.timeline-content p {
+  color: #ffffff;
+  opacity: 0.95;
+}
+    .timeline-content h3 {
+      color: #d4af37;
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+
+    .welcome {
+      padding: 90px 0;
+      background: linear-gradient(135deg, #0a0a0a, #111111);
+      color: #e0e0e0;
+      text-align: center;
+    }
+
+    .welcome h2 {
+      font-size: 42px;
+      margin-bottom: 25px;
+      color: #d4af37;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .welcome p {
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 992px) {
+      .hero h1 { font-size: 42px; }
+      .hero p { font-size: 18px; }
+      .about-content { flex-direction: column; }
+      .timeline::before { left: 25px; }
+      .timeline-item { width: 100%; padding-left: 60px; padding-right: 20px; }
+      .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; }
+      .timeline-item::after { left: 10px; }
+      .news-item { flex-direction: column; gap: 20px; }
+      .news-item img { width: 100%; height: auto; }
+    }
+    /* ====================== SLIDER TRÀN VIỀN FULL SCREEN ====================== */
+.full-slider {
+  position: relative;
+  width: 100vw; /* Tràn full chiều rộng màn hình */
+  height: 100vh; /* Full chiều cao màn hình */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.full-slider .slides-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.full-slider .slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ảnh phủ kín, không méo */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.full-slider .slide.active {
+  opacity: 1;
+}
+
+/* Overlay tối để chữ nổi bật */
+.slider-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Nội dung chữ ở giữa */
+.slider-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.slider-content h1 {
+  font-size: 72px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  letter-spacing: 4px;
+}
+
+.slider-content p {
+  font-size: 32px;
+  margin-bottom: 50px;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+.btn-explore {
+  background: #e67e22;
+  color: white;
+  padding: 18px 45px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.4s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  display: inline-block;
+}
+
+.btn-explore:hover {
+  background: #d35400;
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+}
+
+/* Chấm tròn dưới cùng */
+.dots-container {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 2;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.4s;
+}
+
+.dot.active, .dot:hover {
+  background: #e67e22;
+  transform: scale(1.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .slider-content h1 { font-size: 48px; }
+  .slider-content p { font-size: 24px; }
+  .btn-explore { padding: 15px 35px; font-size: 18px; }
+}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-container">
+    <div class="logo">HUCE HOTEL</div>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Tìm phòng: 101, Đôi, VIP, Suite...">
+      <button onclick="searchRooms()">Tìm</button>
+    </div>
+
+
+    <nav class="nav-menu">
+      <a href="/index.html">Giới thiệu</a>
+      <a href="/booking.html">Đặt phòng</a>
+      <a href="/index.html#news">Tin tức</a>
+      <a href="#hotelfooter">Liên hệ</a>
+
+      <button id="loginBtn" class="auth-btn" onclick="location.href='/login.html'"style="color:#e67e22">Đăng nhập</button>
+
+<div id="userInfo" class="user-dropdown-wrapper" style="display:none;">
+  <div class="user-toggle" onclick="toggleUserMenu()" style="color:#888">
+    Xin chào <strong id="userName"></strong>
+    <span class="arrow">▼🔒</span>
+  </div>
+
+  <div id="userMenu" class="user-menu">
+    <a href="/myrooms.html">Phòng của tôi</a>
+    <a href="/admin.html" id="adminLink" style="display:none;">Quản trị</a>
+    <button onclick="logout()">Đăng xuất</button>
+  </div>
+</div>
+
+    </nav>
+  </div>
+<!-- Hamburger -->
+<div class="mobile-hamburger" id="mobileHamburger">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- Mobile Menu -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="mobile-user">
+    <span>Xin chào <strong id="userNameMobile"></strong></span> <a href="myrooms.html">Phòng của tôi</a>
+    
+    <a href="/admin.html" id="adminLinkMobile" class="admin-btn" style="display:none;">Quản trị</a>
+    
+    <button onclick="logout()" class="logout-btn">Đăng xuất</button>
+  </div>
+
+  <nav class="mobile-nav">
+      <a href="/index.html">Giới thiệu</a>
+      <a href="/booking.html">Đặt phòng</a>
+      <a href="/index.html#news">Tin tức</a>
+      <a href="#hotelfooter">Liên hệ</a>
+  </nav>
+</div>
+
+<!-- Overlay -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+
+</header>
+<!-- SLIDER TRÀN VIỀN FULL SCREEN SIÊU ĐẸP -->
+<div class="full-slider">
+  <div class="slides-wrapper">
+    <img src="hotel1.jpg" class="slide active" alt="HUCE Hotel View 1">
+    <img src="hotel2.jpg" class="slide" alt="HUCE Hotel View 2">
+    <img src="hotel3.jpg" class="slide" alt="HUCE Hotel View 3">
+    <img src="hotel4.jpg" class="slide" alt="HUCE Hotel View 4">
+  </div>
+
+  <!-- Overlay tối nhẹ để chữ nổi -->
+  <div class="slider-overlay"></div>
+
+  <!-- Nội dung chữ ở giữa slider -->
+  <div class="slider-content" style="color:#d4af37">
+    <h1>WELCOME HOME</h1>
+    <p>Nơi nghỉ dưỡng sang trọng – Trải nghiệm hoàn hảo – Dịch vụ 5 sao</p>
+<a href="#about" class="btn-explore-luxury">
+  <span class="btn-text">Khám Phá Ngay</span>
+  <span class="btn-shimmer"></span>
+</a>
+  </div>
+
+  <!-- Chấm tròn điều khiển -->
+  <div class="dots-container">
+    <span class="dot active" onclick="currentSlide(0)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<section id="about" class="about-section">
+  <div class="about-content">
+    <div class="about-text">
+      <h2>Về HUCE Hotel</h2>
+      <p>HUCE Hotel là khách sạn cao cấp tọa lạc tại trung tâm thành phố, được xây dựng với mong muốn mang đến cho quý khách những trải nghiệm nghỉ dưỡng tuyệt vời nhất.</p>
+      <p>Với thiết kế hiện đại kết hợp tinh tế giữa kiến trúc Á Đông và phong cách châu Âu, chúng tôi tự hào là điểm đến lý tưởng cho cả du khách trong nước và quốc tế.</p>
+      <p>Mỗi phòng nghỉ đều được trang bị nội thất cao cấp, tầm nhìn panoramic hướng ra thành phố sôi động hoặc sông nước yên bình.</p>
+    </div>
+    <div class="about-image">
+      <img src="hotel-lobby.jpg" alt="HUCE Hotel Lobby">
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section class="history">
+  <h2>Lịch Sử Hình Thành</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>2015 - Khởi công xây dựng</h3>
+        <p>Dự án HUCE Hotel chính thức được khởi công với tầm nhìn trở thành biểu tượng nghỉ dưỡng mới của thành phố.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>2018 - Hoàn thành giai đoạn 1</h3>
+        <p>Tòa nhà chính và khu vực lobby sang trọng được hoàn thiện, đón những vị khách đầu tiên.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>2020 - Đạt chuẩn 5 sao</h3>
+        <p>HUCE Hotel chính thức được công nhận là khách sạn 5 sao với hệ thống dịch vụ đạt chuẩn quốc tế.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-content">
+        <h3>2025 - Mở rộng khu VIP Suite</h3>
+        <p>Ra mắt khu vực Suite cao cấp với hồ bơi riêng, jacuzzi và dịch vụ butler 24/7.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WELCOME MESSAGE -->
+<section class="welcome">
+  <h2>Chào Mừng Quý Khách Ghé Thăm HUCE Hotel</h2>
+  <p>Chúng tôi rất vinh dự được đón tiếp quý khách tại HUCE Hotel – nơi mỗi khoảnh khắc đều trở thành kỷ niệm đẹp. Đội ngũ nhân viên tận tâm luôn sẵn sàng phục vụ để chuyến đi của quý khách trở nên hoàn hảo nhất.</p>
+  <p>HUCE Hotel – Nơi bạn thuộc về.</p>
+</section>
+<!-- ================= TIN TỨC ================= -->
+<section id="news" class="section">
+    <div class="container">
+
+  <h2>Tin Tức & Ưu Đãi Mới Nhất</h2>
+
+  <!-- JS sẽ render tin tức vào đây -->
+    <div id="newsList">Đang tải tin tức...</div>
+
+    </div>
+</section>
+<section class="team-section">
+    <div class="team-title">
+        <h2>The Visionaries</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="team-grid">
+        <div class="team-card">
+            <div class="img-container">
+                <img src="member1.jpg" alt="Founder 1" class="member-img">
+            </div>
+            <div class="member-info">
+                <h3>Trần Anh Quân</h3>
+                <span class="role">Team Leader</span>
+                <p class="desc">"Một con ngựa đau, cả tàu thêm cỏ."</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/tquan305/"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="img-container">
+                <img src="member2.jpg" alt="Founder 2" class="member-img">
+            </div>
+            <div class="member-info">
+                <h3>Nguyễn Hoàng Nhật</h3>
+                <span class="role">Back-end Developer</span>
+                <p class="desc">"Tình yêu là vĩnh cửu, chỉ có... người yêu là thay đổi."</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="img-container">
+                <img src="member3.jpg" alt="Founder 3" class="member-img">
+            </div>
+            <div class="member-info">
+                <h3>Phạm Văn Phát</h3>
+                <span class="role">Front-End Developer</span>
+                <p class="desc">"Tiền không mua được hạnh phúc, nhưng nó giúp bạn... khóc ở Dubai thay vì ở xóm trọ."</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="team-card">
+            <div class="img-container">
+                <img src="member4.jpg" alt="Founder 4" class="member-img">
+            </div>
+            <div class="member-info">
+                <h3>Nguyễn Hà Sơn</h3>
+                <span class="role">Bú Ké Developer</span>
+                <p class="desc">"Đường lên đỉnh vinh quang rất hẹp, nên tốt nhất là... ở dưới cho mát."</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================= MODAL BOOKING (THÊM VÀO ĐÂY NẾU CHƯA CÓ) ================= -->
+<div id="bookingModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" alt="Phòng Image">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDesc"></p>
+    <p id="modalPrice"></p>
+    <form>
+      <input id="customerName" placeholder="Tên khách hàng">
+      <input id="customerPhone" placeholder="Số điện thoại">
+      <input type="date" id="checkinDate">
+      <input type="date" id="checkoutDate">
+      <button type="button" onclick="confirmBooking()">Xác nhận đặt phòng</button>
+    </form>
+  </div>
+</div>
+
+<!-- ================= TOAST (THÊM VÀO ĐÂY) ================= -->
+<div id="successToast" class="toast">
+  <span>Thành công!</span>
+</div>
+<section class="reviews-section">
+    <h2>Phản Hồi Từ Các "Thượng Đế"</h2>
+    
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="stars">
+                <i class="fas fa-star-half-alt" style="color: #d4af37;"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i>> </div>
+            <p class="review-text">"Phòng quá đẹp, nệm quá êm làm tôi ngủ quên cả giờ ra sân bay. Khách sạn gì mà làm khách trễ chuyến bay thế này? 0.5 sao vì sự êm ái quá đáng!"</p>
+            <div class="customer-info">
+                <img src="https://i.pravatar.cc/150?u=1" alt="Guest">
+                <div>
+                    <h4>Anh thợ săn</h4>
+                    <span>Hà Nội, Việt Nam</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">
+                <i class="fas fa-star-half-alt" style="color: #d4af37;"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i>
+            </div>
+            <p class="review-text">"Nhân viên quá nhiệt tình, lúc nào cũng cười làm tôi tưởng tôi nợ tiền họ. Đề nghị bớt thân thiện lại để tôi còn thấy mình là khách."</p>
+            <div class="customer-info">
+                <img src="https://i.pravatar.cc/150?u=2" alt="Guest">
+                <div>
+                    <h4>Chị đại quận 4</h4>
+                    <span>TP. Hồ Chí Minh</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">
+                <i class="fas fa-star-half-alt" style="color: #d4af37;"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i>
+            </div>
+            <p class="review-text">"Buffet sáng ngon quá làm tôi ăn đến mức không đi bộ nổi ra bãi biển. Phải thuê xe điện tốn thêm tiền. Quá thất vọng vì đồ ăn ngon!"</p>
+            <div class="customer-info">
+                <img src="https://i.pravatar.cc/150?u=3" alt="Guest">
+                <div>
+                    <h4>Thánh ăn hàng</h4>
+                    <span>Singapore</span>
+                </div>
+            </div>
+        </div>
+        <div class="review-card">
+    <div class="stars">
+        <i class="fas fa-star-half-alt" style="color: #d4af37;"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> </div>
+    <p class="review-text">"Phòng quá êm, ngủ quên cả giờ đi làm. Sếp đuổi việc tôi rồi, khách sạn đền đi chứ sao lại phục vụ tốt thế? 0.5 sao vì làm tôi thất nghiệp!"</p>
+    <div class="customer-info">
+        <img src="https://i.pravatar.cc/150?u=8" alt="Guest">
+        <div>
+            <h4>Thất Nghiệp Công Tử</h4>
+            <span>Hà Nội, Việt Nam</span>
+        </div>
+    </div>
+</div>
+        <div class="review-card">
+            <div class="stars">
+                <i class="fas fa-star-half-alt" style="color: #d4af37;"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i> <i class="far fa-star"></i>
+            </div>
+            <p class="review-text">"View phòng nhìn thẳng ra sông cực chill, làm tôi mải ngắm cảnh quên cả nhắn tin cho người yêu. Giờ tôi bị chia tay rồi, khách sạn đền đi!"</p>
+            <div class="customer-info">
+                <img src="https://i.pravatar.cc/150?u=4" alt="Guest">
+                <div>
+                    <h4>Kẻ si tình</h4>
+                    <span>Đà Lạt</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ================= FOOTER ================= -->
+<footer class="hotel-footer" id="hotelfooter">
+  <div class="footer-container">
+
+    <!-- CỘT 1: LIÊN HỆ -->
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+
+      <p class="footer-label">Hotline</p>
+      <p class="footer-highlight">03456789JQK</p>
+      <p class="footer-text">Thứ 2 – Chủ nhật (08:00 – 23:00)</p>
+
+      <p class="footer-label">Email</p>
+      <p class="footer-text">support@hucehotel.vn</p>
+
+      <p class="footer-label">Địa chỉ</p>
+      <p class="footer-text">
+        Phòng 36 Tòa nhà H3<br>
+        55 Giải Phóng, TP Hà Nội
+      </p>
+    </div>
+
+    <!-- CỘT 2: DÀNH CHO KHÁCH HÀNG -->
+    <div class="footer-col">
+      <h4>Dành cho khách hàng</h4>
+      <a href="#">Điều khoản sử dụng</a>
+      <a href="#">Chính sách bảo mật</a>
+      <a href="#">Chính sách hủy phòng</a>
+      <a href="#">Hướng dẫn đặt phòng</a>
+      <a href="#">Câu hỏi thường gặp</a>
+    </div>
+
+    <!-- CỘT 3: VỀ KHÁCH SẠN -->
+    <div class="footer-col">
+      <h4>Về HUCE Hotel</h4>
+      <a href="/index.html">Giới thiệu</a>
+      <a href="/booking.html#booking">Hệ thống phòng</a>
+      <a href="#">Dịch vụ & tiện ích</a>
+      <a href="/index.html#news">Tin tức & ưu đãi</a>
+      <a href="#">Tuyển dụng</a>
+    </div>
+
+    <!-- CỘT 4: ỨNG DỤNG + MXH -->
+      <div class="footer-col">
+        <h4>Ứng dụng HUCE Hotel</h4>
+
+        <div class="store-buttons">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1024px-Google_Play_Store_badge_EN.svg.png"
+            alt="Google Play">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1200px-Download_on_the_App_Store_Badge.svg.png"
+            alt="App Store">
+        </div>
+
+        <h4 class="mt-20">Theo dõi chúng tôi</h4>
+        <div class="social-icons">
+          <a href="#" class="social-fb" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-ig" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-tt" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a href="#" class="social-x" aria-label="X">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+  <div class="footer-bottom">
+    © 2025 HUCE Hotel. All rights reserved.
+  </div>
+</footer>
+
+
+<!-- ================= JS ================= -->
+<script src="js/main.js"></script>
+
+</body>
+</html>

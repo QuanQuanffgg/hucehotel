@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản Trị - HUCE HOTEL</title>
+
+  <!-- Font luxury đồng bộ với các trang khác -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+        .toast {
+      position: fixed;
+      bottom: -100px; /* Ẩn dưới cùng */
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #d4af37, #f0c14b); /* Mặc định vàng gold */
+      color: #0f172a;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      z-index: 10000;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      bottom: 40px; /* Nhảy lên */
+    }
+
+    /* Thêm màu cho thông báo lỗi */
+    .toast.error {
+      background: linear-gradient(90deg, #b0cb4e, #ebf46b);
+      color: #fff;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+    }
+
+    header {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #d4af37;
+      text-align: center;
+      padding: 70px 30px;
+      position: relative;
+    }
+
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #d4af37, #f0c14b);
+    }
+
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 20px;
+      margin-top: 12px;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .admin-controls {
+      text-align: center;
+      padding: 35px;
+      background: #fdfdfd;
+      border-bottom: 1px solid #eee;
+    }
+
+    .btn {
+      padding: 16px 40px;
+      border: none;
+      border-radius: 50px;
+      font-size: 17px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      margin: 0 15px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #d4af37, #f0c14b);
+      color: #0f172a;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-danger {
+      background: linear-gradient(90deg, #e74c3c, #c0392b);
+      color: white;
+      box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
+
+    .section {
+      padding: 70px 60px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0f172a;
+      margin-bottom: 50px;
+      font-size: 36px;
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, #d4af37, #f0c14b);
+      position: absolute;
+      bottom: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 15px;
+      margin: 40px 0;
+    }
+
+    th {
+      background: #0f172a;
+      color: #d4af37;
+      padding: 22px;
+      font-size: 17px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    td {
+      padding: 25px;
+      text-align: center;
+      background: #ffffff;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    tr td:first-child { border-radius: 16px 0 0 16px; }
+    tr td:last-child { border-radius: 0 16px 16px 0; }
+
+    tr:hover td {
+      background: #f8f9fa;
+      transform: scale(1.01);
+      transition: 0.3s;
+    }
+
+    .btn-small {
+      padding: 10px 22px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .btn-accept {
+      background: linear-gradient(90deg, #27ae60, #1e8449);
+      color: white;
+    }
+
+    .btn-reject {
+      background: linear-gradient(90deg, #e74c3c, #c0392b);
+      color: white;
+    }
+
+    .btn-edit { background: #f39c12; color: white; }
+    .btn-delete { background: #c0392b; color: white; }
+
+    .btn-small:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .status-pending { color: #f39c12; font-weight: bold; }
+    .status-approved { color: #27ae60; font-weight: bold; }
+
+    .news-form {
+      background: #fafafa;
+      padding: 50px;
+      border-radius: 24px;
+      margin-bottom: 70px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      border: 1px solid #eee;
+    }
+
+    .news-form input,
+    .news-form textarea {
+      width: 100%;
+      padding: 18px 22px;
+      margin: 20px 0;
+      border-radius: 16px;
+      border: 2px solid #e0e0e0;
+      font-size: 17px;
+      transition: all 0.3s;
+    }
+
+    .news-form input:focus,
+    .news-form textarea:focus {
+      outline: none;
+      border-color: #d4af37;
+      box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.15);
+    }
+
+    .news-form textarea {
+      height: 180px;
+      resize: vertical;
+    }
+
+    .image-upload {
+      border: 3px dashed #d4af37;
+      padding: 50px;
+      border-radius: 20px;
+      text-align: center;
+      cursor: pointer;
+      background: #fffdf0;
+      transition: 0.3s;
+      margin: 30px 0;
+    }
+
+    .image-upload:hover {
+      background: #fff8e0;
+      border-color: #c4a137;
+    }
+
+    #imagePreview {
+      max-width: 100%;
+      max-height: 400px;
+      margin-top: 25px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      display: none;
+    }
+
+    .news-item {
+      background: white;
+      padding: 40px;
+      border-radius: 24px;
+      margin: 40px 0;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 40px;
+      align-items: center;
+      border: 1px solid #f0e6d2;
+    }
+
+    .news-item img {
+      width: 380px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .news-content {
+      flex: 1;
+    }
+
+    .news-content h3 {
+      color: #0f172a;
+      margin: 0 0 20px;
+      font-size: 28px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .news-content p {
+      font-size: 17px;
+      line-height: 1.9;
+      color: #555;
+    }
+
+    .news-content small {
+      color: #888;
+      font-style: italic;
+    }
+
+    .news-actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 15px;
+    }
+
+    hr {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #eee, transparent);
+      margin: 60px 0;
+    }
+
+    @media (max-width: 992px) {
+      .news-item {
+        flex-direction: column;
+      }
+      .news-item img {
+        width: 100%;
+        height: 300px;
+      }
+    }
+    /* ================= RESPONSIVE TABLE CHO MOBILE ================= */
+@media (max-width: 992px) {
+  table {
+    border-spacing: 0;
+    width: 100%;
+  }
+
+  thead {
+    display: none; /* Ẩn header bảng trên mobile */
+  }
+
+  tr {
+    display: block;
+    background: white;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  td {
+    display: block;
+    text-align: right;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    font-size: 16px;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 20px;
+    font-weight: 600;
+    color: #0f172a;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  td {
+    text-align: right;
+    padding-left: 50%;
+  }
+
+  /* Cột hành động đặc biệt */
+  td:last-child {
+    text-align: center;
+    padding-left: 20px;
+  }
+
+  .btn-small {
+    margin: 8px;
+    min-width: 100px;
+  }
+
+  /* Đảm bảo nút không bị lệch */
+  td:last-child .btn-small {
+    display: inline-block;
+  }
+}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>QUẢN TRỊ HỆ THỐNG</h1>
+    <p>HUCE HOTEL – Đẳng cấp quản lý thượng lưu</p>
+  </header>
+
+  <div class="admin-controls">
+    <button class="btn btn-primary" onclick="location.href='/'">Về Trang Chủ</button>
+    <button class="btn btn-danger" onclick="logout()">Đăng Xuất</button>
+  </div>
+
+  <div class="section">
+    <h2>DANH SÁCH ĐẶT PHÒNG</h2>
+    <div id="bookingTable">Đang tải dữ liệu...</div>
+  </div>
+
+  <hr>
+
+  <div class="section">
+    <h2>ĐĂNG TIN TỨC MỚI</h2>
+
+    <div class="news-form">
+      <input id="newsTitle" placeholder="Nhập tiêu đề tin tức nổi bật">
+      <textarea id="newsContent" placeholder="Viết nội dung chi tiết, hấp dẫn..."></textarea>
+
+      <div class="image-upload" onclick="fileInput.click()">
+        <strong>Click để tải lên hình ảnh minh họa</strong><br>
+        (Định dạng JPG, PNG – Tối đa 5MB)
+        <input type="file" id="fileInput" hidden accept="image/*" onchange="previewImage(event)">
+        <img id="imagePreview" alt="Preview ảnh tin tức">
+      </div>
+
+      <button class="btn btn-primary" onclick="postNews()">ĐĂNG BÀI NGAY</button>
+    </div>
+
+    <h2>DANH SÁCH TIN TỨC ĐÃ ĐĂNG</h2>
+    <div id="newsList">Đang tải tin tức...</div>
+  </div>
+</div>
+
+<script>
+/* ================= JWT CHECK ================= */
+const token = localStorage.getItem('token');
+const user  = JSON.parse(localStorage.getItem('user') || 'null');
+
+if (!token || !user || user.role !== 'admin') {
+  showToast('Không có quyền truy cập trang quản trị',true);
+  location.href = '/login.html';
+}
+
+/* ================= LOGOUT ================= */
+function logout() {
+  localStorage.clear();
+  location.href = '/login.html';
+}
+
+/* ================= IMAGE PREVIEW ================= */
+function previewImage(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    const preview = document.getElementById('imagePreview');
+    preview.src = reader.result;
+    preview.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ================= POST NEWS ================= */
+async function postNews() {
+  const title = document.getElementById('newsTitle').value.trim();
+  const content = document.getElementById('newsContent').value.trim();
+  const image = document.getElementById('imagePreview').src || '';
+  const date = new Date().toLocaleDateString('vi-VN');
+
+  if (!title || !content) {
+    showToast('Vui lòng nhập đầy đủ tiêu đề và nội dung tin tức',true);
+    return;
+  }
+
+  const res = await fetch('/api/admin/news', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    },
+    body: JSON.stringify({ title, content, image, date })
+  });
+
+  const data = await res.json();
+
+  if (!data.success) {
+    showToast(data.message || 'Đăng bài thất bại',true);
+    return;
+  }
+
+  document.getElementById('newsTitle').value = '';
+  document.getElementById('newsContent').value = '';
+  document.getElementById('imagePreview').style.display = 'none';
+  document.getElementById('fileInput').value = '';
+
+  showToast('Đăng tin thành công!',true);
+  loadNews();
+}
+
+/* ================= LOAD NEWS ================= */
+async function loadNews() {
+  const res = await fetch('/api/admin/news', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+
+  const data = await res.json();
+  const newsList = document.getElementById('newsList');
+
+  if (!data.success || data.data.length === 0) {
+    newsList.innerHTML = '<p style="text-align:center;color:#888;font-size:18px;">Chưa có tin tức nào được đăng.</p>';
+    return;
+  }
+
+  newsList.innerHTML = data.data.map(n => `
+    <div class="news-item">
+      <img src="${n.image || 'images/news-default.jpg'}" alt="${n.title}">
+      <div class="news-content">
+        <h3>${n.title}</h3>
+        <p>${n.content}</p>
+        <small>Đăng ngày: ${n.date}</small>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ================= LOAD BOOKINGS ================= */
+async function loadBookings() {
+  const res = await fetch('/api/admin/bookings', {
+    headers: { Authorization: 'Bearer ' + token }
+  });
+
+  const data = await res.json();
+  const bookingTable = document.getElementById('bookingTable');
+
+  if (!data.success || data.data.length === 0) {
+    bookingTable.innerHTML = '<p style="text-align:center;color:#888;font-size:18px;">Hiện chưa có đặt phòng nào.</p>';
+    return;
+  }
+
+  bookingTable.innerHTML = `
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Khách hàng</th>
+        <th>Phòng</th>
+        <th>Thời gian lưu trú</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${data.data.map((b, i) => `
+        <tr>
+          <td data-label="#">${i + 1}</td>
+          <td data-label="Khách hàng"><strong>${b.userName}</strong></td>
+          <td data-label="Phòng">Phòng ${b.roomId}<br><small>${b.roomType}</small></td>
+          <td data-label="Thời gian">
+            ${new Date(b.checkin).toLocaleDateString('vi-VN')}<br>
+            → ${new Date(b.checkout).toLocaleDateString('vi-VN')}
+          </td>
+          <td data-label="Trạng thái" class="${b.status === 'pending' ? 'status-pending' : 'status-approved'}">
+            ${b.status === 'pending' ? 'Chờ duyệt' : 'Đã duyệt'}
+          </td>
+          <td data-label="Hành động">
+            ${b.status === 'pending' ? `
+              <button class="btn-small btn-accept" onclick="updateBooking('${b._id}','approved')">Duyệt</button>
+              <button class="btn-small btn-reject" onclick="updateBooking('${b._id}','cancelled')">Từ chối</button>
+            ` : '<em style="color:#888;">Đã xử lý</em>'}
+          </td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+`;
+}
+
+/* ================= UPDATE BOOKING STATUS ================= */
+async function updateBooking(id, status) {
+  if (!confirm(`Bạn có chắc muốn ${status === 'approved' ? 'DUYỆT' : 'TỪ CHỐI'} đặt phòng này?`)) return;
+
+  const res = await fetch(`/api/admin/bookings/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+    },
+    body: JSON.stringify({ status })
+  });
+
+  const data = await res.json();
+
+  if (!data.success) {
+    showToast(data.message || 'Cập nhật thất bại',true);
+    return;
+  }
+
+  showToast('Cập nhật trạng thái thành công!',true);
+  loadBookings();
+}
+
+/* ================= INIT ================= */
+loadBookings();
+loadNews();
+/* Hàm hiển thị thông báo thay thế alert */
+function showToast(message, isError = false) {
+    // Tạo element toast mới
+    const toast = document.createElement("div");
+    toast.className = "toast";
+    if (isError) toast.classList.add("error");
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // Kích hoạt hiệu ứng hiện lên
+    setTimeout(() => toast.classList.add("show"), 100);
+
+    // Tự động biến mất sau 3 giây
+    setTimeout(() => {
+        toast.classList.remove("show");
+        setTimeout(() => toast.remove(), 500); // Xóa khỏi DOM
+    }, 3000);
+}
+
+/* Kiểm tra Token thay vì alert */
+if (!token) {
+  showToast("Bạn cần đăng nhập để đặt phòng!", true);
+}
+
+/* ... (Phần logic rooms giữ nguyên) ... */
+
+/* Cập nhật hàm Submit */
+async function submitBooking() {
+  const phone = document.getElementById('phone');
+  const checkin = document.getElementById('checkin');
+  const checkout = document.getElementById('checkout');
+  const roomSelect = document.getElementById('roomSelect');
+
+  if (!phone.value || !checkin.value || !checkout.value || !roomSelect.value) {
+    showToast("Vui lòng nhập đủ thông tin bắt buộc!", true);
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token
+      },
+      body: JSON.stringify({
+        phone: phone.value,
+        roomId: roomSelect.value,
+        checkin: checkin.value,
+        checkout: checkout.value
+      })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      showToast("Đặt phòng thành công! Đang chuyển hướng...");
+      setTimeout(() => location.href = "/myrooms.html", 2500);
+    } else {
+      showToast(data.message || "Đặt phòng thất bại", true);
+    }
+  } catch (err) {
+    showToast("Lỗi kết nối máy chủ!", true);
+  }
+}
+</script>
+
+</body>
+</html>

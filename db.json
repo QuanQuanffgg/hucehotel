@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@huce.com",
+      "password": "123456",
+      "name": "Admin HUCE",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "email": "user@gmail.com",
+      "password": "123456",
+      "name": "Nguyễn Văn A",
+      "role": "user"
+    },
+    {
+      "id": 1764419501759,
+      "name": "Trần Anh Quân",
+      "email": "anhquanttlt1011@gmail.com",
+      "password": "30052006",
+      "role": "user"
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1764419972615,
+      "userId": 1764419501759,
+      "userName": "Trần Anh Quân",
+      "userEmail": "anhquanttlt1011@gmail.com",
+      "phone": "0345980195",
+      "roomId": 101,
+      "roomType": "Phòng Đơn",
+      "checkin": "2025-11-30",
+      "checkout": "2025-12-01",
+      "days": 1,
+      "totalPrice": 800000,
+      "status": "approved",
+      "createdAt": "29/11/2025"
+    },
+    {
+      "id": 1764420051334,
+      "userId": 1764419501759,
+      "userName": "Trần Anh Quân",
+      "userEmail": "anhquanttlt1011@gmail.com",
+      "phone": "0345980195",
+      "roomId": 103,
+      "roomType": "Phòng Đơn",
+      "checkin": "2025-11-29",
+      "checkout": "2025-12-01",
+      "days": 2,
+      "totalPrice": 1600000,
+      "status": "approved",
+      "createdAt": "29/11/2025"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "Khai trương chi nhánh Đà Nẵng",
+      "content": "Giảm 20% cho khách đặt sớm...",
+      "image": "hotel1.jpg",
+      "date": "28/11/2025"
+    }
+  ]
+}
