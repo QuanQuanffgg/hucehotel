@@ -209,8 +209,8 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
 
-    .status-pending { color: #f39c12; font-weight: bold; }
-    .status-approved { color: #27ae60; font-weight: bold; }
+    .status-pending { color: #1c1c1c; font-weight: bold; }
+    .status-approved { color: #ffff52; font-weight: bold; }
 
     .news-form {
       background: #fafafa;
@@ -554,8 +554,8 @@ async function loadBookings() {
   <table>
     <thead>
       <tr>
-        <th>#</th>
-        <th>Khách hàng</th>
+        <th>STT</th>
+        <th>Thông Tin Khách hàng</th>
         <th>Phòng</th>
         <th>Thời gian lưu trú</th>
         <th>Trạng thái</th>
@@ -573,7 +573,7 @@ async function loadBookings() {
             → ${new Date(b.checkout).toLocaleDateString('vi-VN')}
           </td>
           <td data-label="Trạng thái" class="${b.status === 'pending' ? 'status-pending' : 'status-approved'}">
-            ${b.status === 'pending' ? 'Chờ duyệt' : 'Đã duyệt'}
+            ${b.status === 'pending' ? 'Chờ duyệt' : 'Đã xử lý'}
           </td>
           <td data-label="Hành động">
             ${b.status === 'pending' ? `
