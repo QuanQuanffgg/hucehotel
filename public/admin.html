@@ -566,7 +566,7 @@ async function loadBookings() {
       ${data.data.map((b, i) => `
         <tr>
           <td data-label="#">${i + 1}</td>
-          <td data-label="Khách hàng"><strong>${b.userName}</strong></td>
+          <td data-label="Thông tin Khách hàng"><strong>${b.userEmail} - ${b.phone}</strong></td>
           <td data-label="Phòng">Phòng ${b.roomId}<br><small>${b.roomType}</small></td>
           <td data-label="Thời gian">
             ${new Date(b.checkin).toLocaleDateString('vi-VN')}<br>
