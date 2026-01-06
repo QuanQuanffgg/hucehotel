@@ -495,7 +495,6 @@ async function loadBookings() {
           <h3>Phòng ${b.roomId} - ${b.roomType}</h3>
         </div>
         <div class="booking-body">
-          <p><strong>Khách:</strong> <span>${b.userName}</span></p>
           <p><strong>Thời gian:</strong>
             <span>${new Date(b.checkin).toLocaleDateString('vi-VN')} → ${new Date(b.checkout).toLocaleDateString('vi-VN')}</span>
           </p>
